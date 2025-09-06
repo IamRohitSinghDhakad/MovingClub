@@ -1,5 +1,5 @@
 {
-  "originHash" : "b84c902ed3cf56e233dfa995c10724b3b9a0fec3c659c54c03e5f77b40abd4fa",
+  "originHash" : "7fd33a31ae1e62b004f1d6b81ceb1f019e66a237195f2465c7de482695ac6863",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -11,9 +11,9 @@
       }
     },
     {
-      "identity" : "alamofire",
+      "identity" : "alamofire?tab=readme-ov-file",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "location" : "https://github.com/Alamofire/Alamofire?tab=readme-ov-file",
       "state" : {
         "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
         "version" : "5.10.2"
@@ -31,7 +31,7 @@
     {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/firebase-ios-sdk.git",
+      "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
         "revision" : "e2a3c3fbcaa1df3fd549b5b3f1175bc8a11912fd",
         "version" : "12.2.0"
@@ -202,7 +202,7 @@
     {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "location" : "https://github.com/SDWebImage/SDWebImage",
       "state" : {
         "revision" : "34cf2423a2c4088d06a3b08655603b5bc3eeeb3a",
         "version" : "5.21.2"

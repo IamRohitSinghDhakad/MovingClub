@@ -25,6 +25,21 @@
             </objects>
             <point key="canvasLocation" x="988.54961832061065" y="3.5211267605633805"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="Fxz-z3-xTY">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="z4I-Ba-gB9" customClass="LoginViewController" customModule="MovingClub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9SU-ay-7Tg">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="QbS-vK-DWf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rAS-br-X0n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1663" y="4"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="37X-me-A1E">
             <objects>

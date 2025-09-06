@@ -13,8 +13,6 @@ import SVProgressHUD
 
 var strAuthToken : String = ""
 
-
-
 let objWebServiceManager = WebServiceManager.sharedObject()
 
 class Connectivity {
