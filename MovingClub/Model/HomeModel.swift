@@ -7,184 +7,122 @@
 
 import UIKit
 
-class HomeModel: NSObject {
+class CategoryModel: NSObject {
     
-    var mission_id: String?
-    var user_id: String?
-    var language: String?
-    var assignment_date: String?
-    var start_time: String?
-    var end_time:String?
-    var client_name: String?
-    var client_address: String?
-    var lep_name: String?
-    var descriptionField: String?
-    var status: String?
-    var entrydt: String?
-    var updatedt: String?
-    var time_ago: String?
-    var strClientLocation : String?
-    var strMissionType : String?
-    var strduration : String?
-    var strInvoice_url : String?
-    var strMileage : String?
-    var strMileageUnit : String?
-    var comments: [CommentModel] = []
+    var categoryID: String?
+    var categoryName: String?
+    var categoryImage: String?
+    var sortOrder: Int?
+    var status: Int?
+    var entryDate: String?
+    var isSelected: Bool = false
     
     init(from dictionary: [String: Any]) {
         super.init()
         
-        if let value = dictionary["mission_id"] as? String {
-            mission_id = value
-        } else if let value = dictionary["mission_id"] as? Int {
-            mission_id = "\(value)"
+        if let value = dictionary["id"] as? Int {
+            categoryID = "\(value)"
+        } else if let value = dictionary["id"] as? String {
+            categoryID = value
         }
         
-        if let value = dictionary["user_id"] as? String {
-            user_id = value
-        } else if let value = dictionary["user_id"] as? Int {
-            user_id = "\(value)"
+        categoryName = dictionary["name"] as? String
+        categoryImage = dictionary["image"] as? String
+        
+        if let value = dictionary["sort_order"] as? Int {
+            sortOrder = value
+        } else if let value = dictionary["sort_order"] as? String, let intVal = Int(value) {
+            sortOrder = intVal
         }
         
-        if let value = dictionary["language"] as? String {
-            language = value
-        }
-        
-        if let value = dictionary["mission_type"] as? String {
-            strMissionType = value
-        }
-        
-        if let value = dictionary["client_address"] as? String {
-            strClientLocation = value
-        }
-        
-        if let value = dictionary["assignment_date"] as? String {
-            assignment_date = value
-        }
-        
-        if let value = dictionary["start_time"] as? String {
-            start_time = value
-        }
-        
-        if let value = dictionary["end_time"] as? String {
-            end_time = value
-        }
-        
-        
-        if let value = dictionary["client_name"] as? String {
-            client_name = value
-        }
-        
-        if let value = dictionary["client_address"] as? String {
-            client_address = value
-        }
-        
-        if let value = dictionary["lep_name"] as? String {
-            lep_name = value
-        }
-        
-        if let value = dictionary["description"] as? String {
-            descriptionField = value
-        }
-        
-        if let value = dictionary["status"] as? String {
+        if let value = dictionary["status"] as? Int {
             status = value
+        } else if let value = dictionary["status"] as? String, let intVal = Int(value) {
+            status = intVal
         }
         
-        if let value = dictionary["invoice_url"] as? String {
-            strInvoice_url = value
-        }
-        
-        if let value = dictionary["entrydt"] as? String {
-            entrydt = value
-        }
-        
-        if let value = dictionary["updatedt"] as? String {
-            updatedt = value
-        }
-        
-        if let value = dictionary["time_ago"] as? String {
-            time_ago = value
-        }
-        
-        if let value = dictionary["duration"] as? String {
-            strduration = value
-        }
-        
-        if let value = dictionary["duration"] as? String {
-            strduration = value
-        }
-        
-        if let value = dictionary["mileage"] {
-            if let doubleValue = value as? Double {
-                strMileage = String(doubleValue)
-            } else if let stringValue = value as? String {
-                strMileage = stringValue
-            }
-        }
-
-        if let value = dictionary["mileage_unit"] as? String {
-            strMileageUnit = value
-        }
-        
-        if let commentArray = dictionary["comments"] as? [[String: Any]] {
-            for dict in commentArray {
-                let comment = CommentModel(from: dict)
-                comments.append(comment)
-            }
-        }
+        entryDate = dictionary["entrydt"] as? String
     }
 }
-class CommentModel: NSObject {
+
+
+
+class VideoModel: NSObject {
     
-    var comment: String?
-    var comment_id: String?
-    var entrydt: String?
-    var mission_id: String?
-    var updatedt: String?
-    var user_id: String?
-    var time_ago: String?
-    var user_image: String?
+    var videoID: String?
+    var categoryIDs: [String]?
+    var categoryNames: [String]?
+    var entryDate: String?
+    var isPlanActive: Bool?
+    var sortOrder: Int?
+    var status: Int?
+    var thumbnailURL: String?
+    var videoURL: String?
+    var type: String?   // "Free" or "Paid"
+    var isSelected: Bool = false
     
     init(from dictionary: [String: Any]) {
         super.init()
         
-        if let value = dictionary["comment"] as? String {
-            comment = value
+        // id
+        if let value = dictionary["id"] as? Int {
+            videoID = "\(value)"
+        } else if let value = dictionary["id"] as? String {
+            videoID = value
         }
         
-        if let value = dictionary["comment_id"] as? String {
-            comment_id = value
-        } else if let value = dictionary["comment_id"] as? Int {
-            comment_id = "\(value)"
+        // category_id → [String]
+        if let catString = dictionary["category_id"] as? String {
+            categoryIDs = catString.components(separatedBy: ",")
         }
         
+        // category_names → [String]
+        if let names = dictionary["category_names"] as? [String] {
+            categoryNames = names
+        }
+        
+        // entrydt
         if let value = dictionary["entrydt"] as? String {
-            entrydt = value
+            entryDate = value
         }
         
-        if let value = dictionary["mission_id"] as? String {
-            mission_id = value
-        } else if let value = dictionary["mission_id"] as? Int {
-            mission_id = "\(value)"
+        // is_plan_active → Bool
+        if let value = dictionary["is_plan_active"] as? Int {
+            isPlanActive = (value == 1)
+        } else if let value = dictionary["is_plan_active"] as? String,
+                  let intVal = Int(value) {
+            isPlanActive = (intVal == 1)
         }
         
-        if let value = dictionary["updatedt"] as? String {
-            updatedt = value
+        // sort_order
+        if let value = dictionary["sort_order"] as? Int {
+            sortOrder = value
+        } else if let value = dictionary["sort_order"] as? String,
+                  let intVal = Int(value) {
+            sortOrder = intVal
         }
         
-        if let value = dictionary["time_ago"] as? String {
-            time_ago = value
+        // status
+        if let value = dictionary["status"] as? Int {
+            status = value
+        } else if let value = dictionary["status"] as? String,
+                  let intVal = Int(value) {
+            status = intVal
         }
         
-        if let value = dictionary["user_image"] as? String {
-            user_image = value
+        // thumbnail
+        if let value = dictionary["thumbnail"] as? String {
+            thumbnailURL = value
         }
         
-        if let value = dictionary["user_id"] as? String {
-            user_id = value
-        } else if let value = dictionary["user_id"] as? Int {
-            user_id = "\(value)"
+        // video
+        if let value = dictionary["video"] as? String {
+            videoURL = value
+        }
+        
+        // type
+        if let value = dictionary["type"] as? String {
+            type = value
         }
     }
 }

@@ -115,28 +115,53 @@ class AlertViewController: UIViewController {
 }
 
 extension UIViewController {
-
-func showToast(message : String, font: UIFont) {
-
-    let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
-    toastLabel.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-    toastLabel.textColor = UIColor.white
-    toastLabel.font = font
-    toastLabel.textAlignment = .center;
-    toastLabel.text = message
-    toastLabel.alpha = 1.0
-    toastLabel.layer.cornerRadius = 10;
-    toastLabel.clipsToBounds  =  true
-    self.view.addSubview(toastLabel)
-    UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-         toastLabel.alpha = 0.0
-    }, completion: {(isCompleted) in
-        toastLabel.removeFromSuperview()
-    })
- }
-    
+    func showToast(message: String,
+                   fontName: String = "CenturyGothic",
+                   fontSize: CGFloat = 14) {
+        
+        let toastLabel = UILabel()
+        toastLabel.text = message
+        toastLabel.textColor = .white
+        toastLabel.backgroundColor = UIColor.red.withAlphaComponent(0.9)
+        toastLabel.font = UIFont(name: fontName, size: fontSize) ?? .systemFont(ofSize: fontSize)
+        toastLabel.textAlignment = .center
+        toastLabel.numberOfLines = 0
+        toastLabel.alpha = 0.0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+        
+        // Dynamic width based on text
+        let maxWidthPercentage: CGFloat = 0.8
+        let maxMessageSize = CGSize(width: self.view.bounds.width * maxWidthPercentage,
+                                    height: self.view.bounds.height)
+        var expectedSize = toastLabel.sizeThatFits(maxMessageSize)
+        expectedSize.width += 20
+        expectedSize.height += 12
+        
+        // Place above safe area bottom
+        let bottomPadding = self.view.safeAreaInsets.bottom + 20
+        
+        toastLabel.frame = CGRect(
+            x: (self.view.frame.size.width - expectedSize.width) / 2,
+            y: self.view.frame.size.height - expectedSize.height - bottomPadding,
+            width: expectedSize.width,
+            height: expectedSize.height
+        )
+        
+        self.view.addSubview(toastLabel)
+        
+        // Animation: Fade in, delay, fade out
+        UIView.animate(withDuration: 0.5, animations: {
+            toastLabel.alpha = 1.0
+        }) { _ in
+            UIView.animate(withDuration: 0.5, delay: 2.0, options: .curveEaseOut, animations: {
+                toastLabel.alpha = 0.0
+            }, completion: { _ in
+                toastLabel.removeFromSuperview()
+            })
+        }
+    }
 }
-
 
 
 

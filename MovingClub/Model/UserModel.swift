@@ -28,7 +28,7 @@ class UserModel: NSObject {
     var noncriminal_certificate_image: String?
     var passport_image: String?
     var status: String?
-    var isFollowed: String?
+    var is_plan_active: String?
     var type: String?
     var strUserId: String?
     var userImage: String?
@@ -182,10 +182,10 @@ class UserModel: NSObject {
         if let value = dictionary["status"] as? String {
             status = value
         }
-        if let value = dictionary["isFollowed"] as? String {
-            isFollowed = value
-        }else  if let value = dictionary["isFollowed"] as? Int {
-            isFollowed = "\(value)"
+        if let value = dictionary["is_plan_active"] as? String {
+            is_plan_active = value
+        }else  if let value = dictionary["is_plan_active"] as? Int {
+            is_plan_active = "\(value)"
         }
         
         if let value = dictionary["type"] as? String {

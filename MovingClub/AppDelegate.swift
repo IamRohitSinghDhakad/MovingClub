@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return AppDelegateManager
     }
     
+    var orientationLock = UIInterfaceOrientationMask.portrait
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //MARK: IQKeyBord Default Settings
@@ -63,19 +65,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applyGlobalFont() {
-        if let regularFont = UIFont(name: "centurygothic", size: 17),
-           let boldFont = UIFont(name: "centurygothic_bold", size: 17) {
-            
-            UILabel.appearance().font = regularFont
-            UIButton.appearance().titleLabel?.font = boldFont  // Optional: Use bold for buttons
-            UITextField.appearance().font = regularFont
-            UITextView.appearance().font = regularFont
-            
-        } else {
-            print("⚠️ centurygothic fonts not loaded properly. Check font name or Info.plist.")
-        }
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return orientationLock
     }
+
+    
+    func applyGlobalFont() {
+        // Use PostScript names, not file names
+        guard let regularFont = UIFont(name: "CenturyGothic", size: 17),
+              let boldFont = UIFont(name: "CenturyGothic-Bold", size: 17) else {
+            print("⚠️ Century Gothic fonts not loaded properly. Check font names or Info.plist.")
+            return
+        }
+        
+        // Apply global appearance
+        UILabel.appearance().font = regularFont
+        UITextField.appearance().font = regularFont
+        UITextView.appearance().font = regularFont
+        
+        UIButton.appearance().titleLabel?.font = boldFont
+    }
+
     
     
     
