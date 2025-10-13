@@ -24,7 +24,8 @@ class AboutViewController: UIViewController, WKNavigationDelegate {
     }
     
     private func loadAboutPage() {
-        if let url = URL(string: BASE_URL + "aboutus") {
+        if let url = URL(string: BASE_URL + "page?page=About%20Us") {
+            print(url)
             let request = URLRequest(url: url)
             webKit.load(request)
         } else {

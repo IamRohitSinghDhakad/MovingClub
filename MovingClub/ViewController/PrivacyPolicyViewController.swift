@@ -25,7 +25,8 @@ class PrivacyPolicyViewController: UIViewController, WKNavigationDelegate {
     }
     
     private func loadAboutPage() {
-        if let url = URL(string: BASE_URL + "PrivacyPolicy") {
+        if let url = URL(string: BASE_URL + "page?page=Privacy") {
+            print(url)
             let request = URLRequest(url: url)
             webVw.load(request)
         } else {

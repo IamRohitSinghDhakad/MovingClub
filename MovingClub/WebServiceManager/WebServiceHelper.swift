@@ -18,6 +18,7 @@ let BASE_URL = "https://ambitious.in.net/Shubham/movingClub/index.php/api/"//Loc
 struct WsUrl{
     
     static let url_LogIn  = BASE_URL + "login"
+    static let uel_SignUp = BASE_URL + "signup"
     static let url_ForgotPassword = BASE_URL + "forgot_password"
     static let url_getUserProfile  = BASE_URL + "get_profile"
     static let url_getCategory  = BASE_URL + "get_category"

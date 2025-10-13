@@ -23,6 +23,8 @@ class VideosByCategoryViewController: UIViewController {
         self.cvVideos.dataSource = self
         
         self.call_Websercice_Video(strCategoryID: strCategoryID)
+        let userName = objAppShareData.UserDetail.name?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.lblUserName.text = (userName?.isEmpty == false) ? "Hello\n\(userName ?? "") :)" : "Hello\nGuest :)"
         
     }
     
@@ -31,6 +33,7 @@ class VideosByCategoryViewController: UIViewController {
     }
     
     @IBAction func btnOnReload(_ sender: Any) {
+        self.call_Websercice_Video(strCategoryID: strCategoryID)
     }
     
     @IBAction func btnOnSideMenu(_ sender: Any) {

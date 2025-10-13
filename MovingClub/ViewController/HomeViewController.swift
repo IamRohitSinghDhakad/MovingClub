@@ -12,12 +12,19 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var cvCategories: UICollectionView!
     var arrCategories = [CategoryModel]()
+    @IBOutlet weak var lblUserName: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.cvCategories.delegate = self
         self.cvCategories.dataSource = self
+        
+        let userName = objAppShareData.UserDetail.firstName?.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.lblUserName.text = (userName?.isEmpty == false) ? "Hello\n\(userName ?? "") :)" : "Hello\nGuest :)"
+
+        
         self.call_Websercice_Categories()
+        self.call_Websercice_GetProfile()
     }
     
     @IBAction func btnReload(_ sender: Any) {
@@ -134,6 +141,46 @@ extension HomeViewController {
                 }
             }else{
                 objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+            }
+        } failure: { (error) in
+            objWebServiceManager.hideIndicator()
+            print("Error \(error)")
+            
+            
+        }
+    }
+    
+    func call_Websercice_GetProfile() {
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+        }
+        
+        objWebServiceManager.showIndicator()
+        
+        let dictParam = ["login_user_id": objAppShareData.UserDetail.strUserId ?? "0"]as [String:Any]
+        print(dictParam)
+        
+        objWebServiceManager.requestPost(strURL: WsUrl.url_getUserProfile, queryParams: [:], params: dictParam, strCustomValidation: "", showIndicator: false) { (response) in
+            objWebServiceManager.hideIndicator()
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            print(response)
+            
+            if status == MessageConstant.k_StatusCode{
+                if let resultArray = response["result"] as? [String: Any] {
+                    let objuser = UserModel(from: resultArray)
+                    
+                    let userName = objuser.firstName?.trimmingCharacters(in: .whitespacesAndNewlines)
+                    print("User Name: \(userName ?? "Guest")")
+                    
+                    self.lblUserName.text = (userName?.isEmpty == false) ? "Hello\n\(userName ?? "") :)" : "Hello\nGuest :)"
+                    
+                }
+            }else{
+               // objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
             }
         } failure: { (error) in
             objWebServiceManager.hideIndicator()

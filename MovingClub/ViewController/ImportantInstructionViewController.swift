@@ -16,7 +16,7 @@ class ImportantInstructionViewController: UIViewController, WKNavigationDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        lblHeading.text = "Terms & Conditions"
+        lblHeading.text = "Important Instructions"
         lblHeading.font =  UIFont(name: "CenturyGothic-Bold", size: 20)
         webvw.navigationDelegate = self
         
@@ -24,7 +24,8 @@ class ImportantInstructionViewController: UIViewController, WKNavigationDelegate
     }
     
     private func loadAboutPage() {
-        if let url = URL(string: BASE_URL + "termsandconditions") {
+        if let url = URL(string: BASE_URL + "page?page=Important%20Instructions") {
+            print(url)
             let request = URLRequest(url: url)
             webvw.load(request)
         } else {

@@ -27,6 +27,7 @@ class MySubscriptionViewController: UIViewController {
         self.lblYear.font = UIFont(name: "CenturyGothic", size: 25)
         
         self.call_Websercice_GetProfile()
+        
     }
     
     @IBAction func btnSideMenu(_ sender: Any) {
@@ -35,6 +36,17 @@ class MySubscriptionViewController: UIViewController {
     }
     
     @IBAction func btnOnSubscribe(_ sender: Any) {
+        if let userId = objAppShareData.UserDetail.strUserId,
+              userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
+           
+        } else {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let vc = (self.mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController)!
+            let navController = UINavigationController(rootViewController: vc)
+            navController.isNavigationBarHidden = true
+            appDelegate.window?.rootViewController = navController
+        }
+       
     }
     
     
@@ -75,7 +87,9 @@ extension MySubscriptionViewController{
                     
                 }
             }else{
-                objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                self.vwBtnSubscribe.isHidden = false
+                self.lblYouAlreadyhave.isHidden = true
+               // objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
             }
         } failure: { (error) in
             objWebServiceManager.hideIndicator()

@@ -26,16 +26,26 @@ class SideMenuManager {
     private var viewControllerCache: [String: UIViewController] = [:]
 
     // MARK: - Default Menu Setup
+    // MARK: - Default Menu Setup
     private func setupDefaultMenu() {
         menuItems = [
             MenuItem(title: "Home", storyboardID: "HomeViewController", iconInactive: "home_inactive", iconActive: "home_active"),
             MenuItem(title: "My Subscription", storyboardID: "MySubscriptionViewController", iconInactive: "profile_inactive", iconActive: "profile_active"),
             MenuItem(title: "About Us", storyboardID: "AboutViewController", iconInactive: "settings_inactive", iconActive: "settings_active"),
             MenuItem(title: "Privacy Policy", storyboardID: "PrivacyPolicyViewController", iconInactive: "privacy_inactive", iconActive: "privacy_active"),
-            MenuItem(title: "Important Instructions", storyboardID: "ImportantInstructionViewController", iconInactive: "info_inactive", iconActive: "info_active"),
-            MenuItem(title: "Logout", storyboardID: nil, iconInactive: "logout_inactive", iconActive: "logout_active")
+            MenuItem(title: "Important Instructions", storyboardID: "ImportantInstructionViewController", iconInactive: "info_inactive", iconActive: "info_active")
         ]
+        
+        // Condition check (example using objAppShareData)
+        if let userId = objAppShareData.UserDetail.strUserId, !userId.isEmpty {
+            // ✅ Logged-in user
+            menuItems.append(MenuItem(title: "Logout", storyboardID: nil, iconInactive: "logout_inactive", iconActive: "logout_active"))
+        } else {
+            // ✅ Guest user
+            menuItems.append(MenuItem(title: "Go to Login", storyboardID: "LoginViewController", iconInactive: "login_inactive", iconActive: "login_active"))
+        }
     }
+
 
     // MARK: - Show Side Menu
     func showMenu(from parent: UIViewController, widthFactor: CGFloat = 0.8) {
@@ -81,19 +91,31 @@ class SideMenuManager {
 
     // MARK: - Handle Menu Selection
     private func handleMenuSelection(_ item: MenuItem, from parent: UIViewController) {
-
+        
         if item.title == "Logout" {
             showLogoutConfirmation(from: parent)
             return
         }
-
+        
+        if item.title == "Go to Login" {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            
+            if let nav = parent.navigationController {
+                nav.pushViewController(loginVC, animated: true)
+            } else {
+                parent.present(loginVC, animated: true)
+            }
+            return
+        }
+        
+        // ✅ For other menu items
         guard let storyboardID = item.storyboardID else { return }
-
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: storyboardID)
-
+        
         if let nav = parent.navigationController {
-            // ✅ Prevent pushing same controller again
+            // Prevent pushing the same controller again
             if let topVC = nav.topViewController,
                type(of: topVC) == type(of: vc) {
                 print("⚠️ Already on \(storyboardID), skipping push")
@@ -119,7 +141,7 @@ class SideMenuManager {
     }
 
     private func performLogout(from parent: UIViewController) {
-       
+        objAppShareData.signOut()
     }
 }
 

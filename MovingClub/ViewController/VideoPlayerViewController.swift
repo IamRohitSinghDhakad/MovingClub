@@ -5,13 +5,6 @@
 //  Created by Rohit Singh Dhakad  [C] on 06/09/25.
 //
 
-//
-//  VideoPlayerViewController.swift
-//  MovingClub
-//
-//  Created by Rohit Singh Dhakad  [C] on 06/09/25.
-//
-
 import UIKit
 import AVKit
 
@@ -89,7 +82,7 @@ class VideoPlayerViewController: UIViewController {
         view.addSubview(progressLabel)
         
         NSLayoutConstraint.activate([
-            progressLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            progressLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             progressLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             progressLabel.heightAnchor.constraint(equalToConstant: 35),
             progressLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 160)
@@ -202,7 +195,8 @@ class VideoPlayerViewController: UIViewController {
             
             playVideo(at: currentIndex)
         } else {
-            dismiss(animated: true, completion: nil)
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CongratulationViewController")as! CongratulationViewController
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
