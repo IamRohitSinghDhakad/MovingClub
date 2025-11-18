@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dym-kk-rBJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dym-kk-rBJ">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
         <array key="centurygothic.ttf">
             <string>CenturyGothic</string>
         </array>
@@ -1449,6 +1452,40 @@ active subscription :)</string>
             </objects>
             <point key="canvasLocation" x="3507.6335877862593" y="828.87323943661977"/>
         </scene>
+        <!--Payment View Controller-->
+        <scene sceneID="7VI-pl-0ce">
+            <objects>
+                <viewController storyboardIdentifier="PaymentViewController" id="HPm-7p-cef" customClass="PaymentViewController" customModule="MovingClub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VEJ-bd-ujd">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qpx-1Y-Vfs">
+                                <rect key="frame" x="0.0" y="118" width="393" height="666"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zoq-mv-cNv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Qpx-1Y-Vfs" firstAttribute="top" secondItem="zoq-mv-cNv" secondAttribute="top" id="Weh-Tl-OqG"/>
+                            <constraint firstItem="zoq-mv-cNv" firstAttribute="bottom" secondItem="Qpx-1Y-Vfs" secondAttribute="bottom" id="Xq2-Ez-Gak"/>
+                            <constraint firstItem="Qpx-1Y-Vfs" firstAttribute="leading" secondItem="zoq-mv-cNv" secondAttribute="leading" id="iF6-AO-HJp"/>
+                            <constraint firstItem="zoq-mv-cNv" firstAttribute="trailing" secondItem="Qpx-1Y-Vfs" secondAttribute="trailing" id="urs-5A-uO9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webVw" destination="Qpx-1Y-Vfs" id="E3V-fQ-bkL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hv9-M1-SpR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4178" y="829"/>
+        </scene>
         <!--Videos By Category View Controller-->
         <scene sceneID="9ja-fK-pEb">
             <objects>
@@ -1865,13 +1902,13 @@ next time
         <image name="eye" catalog="system" width="128" height="79"/>
         <image name="header" width="720" height="358"/>
         <image name="lock" width="62" height="84"/>
-        <image name="logo" width="233" height="233"/>
+        <image name="logo" width="95" height="95"/>
         <image name="one_1" width="684" height="797"/>
         <image name="side_nav" width="64" height="46"/>
         <image name="start" width="218" height="147"/>
         <image name="tick" width="57" height="65"/>
         <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MySubscriptionViewController: UIViewController {
+class MySubscriptionViewController: UIViewController,MakePaymentDelegate {
 
     @IBOutlet weak var lblPrice: UILabel!
     @IBOutlet weak var lblYear: UILabel!
@@ -38,6 +38,10 @@ class MySubscriptionViewController: UIViewController {
     @IBAction func btnOnSubscribe(_ sender: Any) {
         if let userId = objAppShareData.UserDetail.strUserId,
               userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
+            
+            let vc = self.mainStoryboard.instantiateViewController(withIdentifier: "PaymentViewController")as! PaymentViewController
+            
+            self.navigationController?.pushViewController(vc, animated: true)
            
         } else {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -47,6 +51,15 @@ class MySubscriptionViewController: UIViewController {
             appDelegate.window?.rootViewController = navController
         }
        
+    }
+    
+    // Delegate Method to Handle Payment Completion
+    func paymentDidComplete(success: Bool) {
+        if success {
+         
+        }else{
+            
+        }
     }
     
     
