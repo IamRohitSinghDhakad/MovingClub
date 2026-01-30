@@ -22,6 +22,7 @@ class PaymentViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.webVw.navigationDelegate = self
         loadPaymentPage()
     }
     

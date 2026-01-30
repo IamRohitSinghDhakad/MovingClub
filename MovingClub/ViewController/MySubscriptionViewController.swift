@@ -40,7 +40,7 @@ class MySubscriptionViewController: UIViewController,MakePaymentDelegate {
               userId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
             
             let vc = self.mainStoryboard.instantiateViewController(withIdentifier: "PaymentViewController")as! PaymentViewController
-            
+            vc.delegate = self
             self.navigationController?.pushViewController(vc, animated: true)
            
         } else {
@@ -56,10 +56,19 @@ class MySubscriptionViewController: UIViewController,MakePaymentDelegate {
     // Delegate Method to Handle Payment Completion
     func paymentDidComplete(success: Bool) {
         if success {
-         
+            setRootController()
         }else{
-            
+            objAlert.showAlert(message: "Oops! Something Went Wrong! Please try again", controller: self)
         }
+    }
+    
+    func setRootController() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let homeViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        let navController = UINavigationController(rootViewController: homeViewController)
+        navController.navigationBar.isHidden = true
+        appDelegate.window?.rootViewController = navController
     }
     
     
